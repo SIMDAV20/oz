@@ -1,11 +1,595 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    Hola soy simon
-  </body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oz Digital - Tecnología con alma</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500&display=swap');
+        
+        :root {
+            --color-bg: #fcfbf9;
+            --color-text: #333;
+            --color-accent: #8c6db2;
+            --color-accent-light: #c9b6e4;
+            --color-accent-dark: #594181;
+            --color-secondary: #f0e6ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, var(--color-secondary), transparent),
+                        radial-gradient(circle at 70% 60%, rgba(201, 182, 228, 0.4), transparent);
+            opacity: 0.6;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+        }
+        
+        .logo {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .logo-img {
+            width: 180px;
+            height: 180px;
+            background-color: var(--color-accent-light);
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spiral {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: conic-gradient(
+                from 0deg,
+                var(--color-accent-dark),
+                var(--color-accent),
+                var(--color-accent-light),
+                var(--color-bg)
+            );
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+        
+        .logo-text {
+            font-size: 4rem;
+            margin-top: 1rem;
+            color: var(--color-accent-dark);
+            letter-spacing: 0.1em;
+        }
+        
+        .manifesto {
+            font-size: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        /* About Section */
+        .about {
+            padding: 8rem 0;
+            position: relative;
+        }
+        
+        .about-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(201, 182, 228, 0.2), transparent);
+            z-index: -1;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--color-accent-dark);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--color-accent);
+        }
+        
+        .prose {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .prose p {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Columns Section */
+        .columns {
+            padding: 8rem 0;
+            background-color: var(--color-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .columns-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.6), transparent);
+            z-index: 0;
+        }
+        
+        .columns-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .column {
+            flex: 1;
+            min-width: 300px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .column:hover {
+            transform: translateY(-5px);
+        }
+        
+        .column::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background-color: rgba(201, 182, 228, 0.3);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .column-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-accent-dark);
+        }
+        
+        .column-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-accent-dark);
+        }
+        
+        .column-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        /* For Whom Section */
+        .for-whom {
+            padding: 8rem 0;
+            position: relative;
+        }
+        
+        .for-whom-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(201, 182, 228, 0.1), transparent);
+            z-index: -1;
+        }
+        
+        .for-whom-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .for-whom-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        /* Call To Action Section */
+        .cta {
+            padding: 8rem 0;
+            background-color: var(--color-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.7), transparent),
+                radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.5), transparent);
+            z-index: 0;
+        }
+        
+        .cta-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .cta-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--color-accent);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--color-accent-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 3rem 0;
+            text-align: center;
+            background-color: var(--color-bg);
+            position: relative;
+        }
+        
+        .footer-text {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .columns-container {
+                flex-direction: column;
+            }
+            
+            .column {
+                margin-bottom: 3rem;
+            }
+            
+            .hero-content {
+                padding: 0 1rem;
+            }
+            
+            .logo-text {
+                font-size: 3rem;
+            }
+            
+            .manifesto {
+                font-size: 1.3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .prose, .for-whom-text, .cta-text {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Fox Guide */
+        .fox-guide {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background-color: var(--color-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .fox-guide:hover {
+            transform: scale(1.1);
+            background-color: var(--color-accent-dark);
+        }
+        
+        .fox-icon {
+            font-size: 1.5rem;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content fade-in">
+                <div class="logo">
+                    <div class="logo-img">
+                        <div class="spiral"></div>
+                    </div>
+                    <h1 class="logo-text">Oz</h1>
+                </div>
+                <p class="manifesto">Tecnología que no reemplaza, acompaña...</p>
+            </div>
+        </div>
+        <div class="scroll-indicator">&#8595;</div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-bg"></div>
+        <div class="container">
+            <h2 class="section-title fade-in">¿Qué es Oz?</h2>
+            <div class="prose fade-in">
+                <p>Oz no es una app.<br>No es un bot.<br>Oz es un sistema vivo.</p>
+                <p>Una infraestructura de inteligencia que florece desde el alma humana.</p>
+                <p>Creamos tecnología que guía, cuida, potencia… sin quitarte tu esencia.</p>
+                <p>Empezamos por construir un agente de IA para ventas.<br>Pero lo que estamos sembrando es mucho más grande.</p>
+                <p>Oz es el puente entre la consciencia humana y el conocimiento digital.<br>Es tecnología con propósito.<br>Es tu aliado invisible.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Columns Section -->
+    <section class="columns" id="columns">
+        <div class="columns-bg"></div>
+        <div class="container">
+            <div class="columns-container">
+                <div class="column fade-in">
+                    <div class="column-icon">💡</div>
+                    <h3 class="column-title">Semilla actual</h3>
+                    <p class="column-text">Oz Agente Vendedor IA</p>
+                </div>
+                <div class="column fade-in">
+                    <div class="column-icon">🛠️</div>
+                    <h3 class="column-title">En qué estamos</h3>
+                    <p class="column-text">MVP en desarrollo. Infraestructura en fase 1.</p>
+                </div>
+                <div class="column fade-in">
+                    <div class="column-icon">🌱</div>
+                    <h3 class="column-title">Visión próxima</h3>
+                    <p class="column-text">Oz como sistema de apoyo al desarrollo humano</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- For Whom Section -->
+    <section class="for-whom" id="for-whom">
+        <div class="for-whom-bg"></div>
+        <div class="container">
+            <div class="for-whom-content">
+                <h2 class="section-title fade-in">¿Para quién es Oz?</h2>
+                <div class="for-whom-text fade-in">
+                    <p>Si crees que la tecnología puede sanar.</p>
+                    <p>Si intuyes que hay otra forma de liderar.</p>
+                    <p>Si sueñas con construir sin dejarte el alma en el intento…</p>
+                    <p>Oz también es tuyo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call To Action Section -->
+    <section class="cta" id="cta">
+        <div class="cta-bg"></div>
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="section-title fade-in">Co-creemos juntos</h2>
+                <div class="cta-text fade-in">
+                    <p>Estamos buscando aliados del alma.</p>
+                    <p>Si algo dentro de ti se activó, escríbenos.</p>
+                </div>
+                <a href="#" class="cta-button fade-in">Contáctanos</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">Hecho con amor, visión y propósito desde Perú y el alma.</p>
+        </div>
+    </footer>
+    
+    <!-- Fox Guide -->
+    <div class="fox-guide">
+        <div class="fox-icon">🦊</div>
+    </div>
+    
+    <script>
+        // Fade-in animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('active');
+                    }
+                });
+            }
+            
+            // Initial check
+            checkFade();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkFade);
+            
+            // Smooth scroll for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Fox guide functionality
+            const foxGuide = document.querySelector('.fox-guide');
+            foxGuide.addEventListener('click', function() {
+                alert('¡Hola! Soy tu guía en Oz. ¿En qué puedo ayudarte?');
+            });
+        });
+    </script>
+</body>
 </html>
