@@ -1,0 +1,8 @@
+# Excluir .env
+.env
+
+# Si quieres excluir otros archivos, por ejemplo:
+# Ignorar directorios o archivos temporales
+node_modules/
+dist/
+*.log
